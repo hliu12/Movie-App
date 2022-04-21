@@ -27,5 +27,21 @@
       </ul>
     </header>
     Search Page
+    
+    <input type="search" id="searchbar" name="henry">
+      <button>Search</button>
+    
+    <script>
+       function connectAPI() {
+            // Consolidates the XMLHttpRequest in one line then processes and prints the data
+            res = fetch("https://api.adviceslip.com/advice")
+                .then (res => res.text())
+                .then (data => {
+                    data = JSON.parse(data);
+                    data = data.slip.advice;
+                    document.getElementById("fetchDisplay").innerHTML = data;
+                })
+        }
+    </script>
   </body>
 </html>
