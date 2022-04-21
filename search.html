@@ -41,7 +41,8 @@
       }
       
        function connectAPI(query) {
-         var url = "omdapi.com/?apikey=4c3128ae&s=" + query;
+         var url = "https://omdapi.com/?apikey=4c3128ae&s=" + query;
+         console.log(url);
             // Consolidates the XMLHttpRequest in one line then processes and prints the data
             res = fetch(url)
                 .then (res => res.json())
