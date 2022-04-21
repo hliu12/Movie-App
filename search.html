@@ -29,9 +29,13 @@
     Search Page
     
     <input type="search" id="searchbar" name="henry">
-      <button>Search</button>
+      <button id="searchbutton">Search</button>
     
     <script>
+      function search() {
+        console.log("Search function ran");
+      }
+      
        function connectAPI() {
             // Consolidates the XMLHttpRequest in one line then processes and prints the data
             res = fetch("omdapi.com/?apikey=4c3128ae&s")
@@ -42,6 +46,8 @@
         }
       
       connectAPI();
+      
+      document.getElementById('searchbutton').addEventListener("click",search());
     </script>
   </body>
 </html>
