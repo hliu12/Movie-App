@@ -34,13 +34,11 @@
     <script>
        function connectAPI() {
             // Consolidates the XMLHttpRequest in one line then processes and prints the data
-            res = fetch("https://api.adviceslip.com/advice")
-                .then (res => res.text())
+            res = fetch("omdapi.com/?apikey=4c3128ae&s")
+                .then (res => res.json())
                 .then (data => {
-                    data = JSON.parse(data);
-                    data = data.slip.advice;
-                    document.getElementById("fetchDisplay").innerHTML = data;
-                })
+                  console.log(data.Search);
+                 })
         }
       
       connectAPI();
