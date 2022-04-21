@@ -32,21 +32,23 @@
       <button id="searchbutton">Search</button>
     
     <script>
+      
       function search() {
         console.log("Search function ran");
         var query = document.getElementById('searchbar').value;
+        console.log(query);
+        connectAPI(query);
       }
       
-       function connectAPI() {
+       function connectAPI(query) {
+         var url = "omdapi.com/?apikey=4c3128ae&s=" + query;
             // Consolidates the XMLHttpRequest in one line then processes and prints the data
-            res = fetch("omdapi.com/?apikey=4c3128ae&s")
+            res = fetch(url)
                 .then (res => res.json())
                 .then (data => {
                   console.log(data.Search);
                  })
         }
-      
-      connectAPI();
       
       document.getElementById('searchbutton').addEventListener("click",search());
     </script>
