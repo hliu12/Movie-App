@@ -27,31 +27,32 @@
       </ul>
     </header>
     Search Page
-    
-    <input type="search" id="search-bar" name="henry">
-      <button id="search-button">Search</button>
-    
+
+    <input type="search" id="search-bar" name="henry" />
+    <button id="search-button">Search</button>
+
     <script>
-      
       function search() {
         console.log("Search function ran");
-        var query = document.getElementById('search-bar').value;
+        var query = document.getElementById("search-bar").value;
         console.log(query);
         connectAPI(query);
       }
-      
-       function connectAPI(query) {
-         var url = "https://omdapi.com/?apikey=4c3128ae&s=" + query;
-         console.log(url);
-            // Consolidates the XMLHttpRequest in one line then processes and prints the data
-            res = fetch(url)
-                .then (res => res.json())
-                .then (data => {
-                  console.log(data.Search);
-                 })
-        }
-      
-      document.getElementById('search-button').addEventListener("click", search);
+
+      function connectAPI(query) {
+        var url = "omdbapi.com/?apikey=4c3128ae&s=" + query;
+        console.log(url);
+        // Consolidates the XMLHttpRequest in one line then processes and prints the data
+        res = fetch(url)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data.Search);
+          });
+      }
+
+      document
+        .getElementById("search-button")
+        .addEventListener("click", search);
     </script>
   </body>
 </html>
