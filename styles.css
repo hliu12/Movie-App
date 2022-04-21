@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#header {
+  height: 75px;
+  background-color: rgb(233, 97, 63);
+}
+
+#header-list {
+  font-family: SnappyDresser;
+  font-weight: bold;
+  font-size: 18px;
+  height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#header-items {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#header-items li {
+  list-style: none;
+  margin-right: 40px;
+}
+
+#header-items li a {
+  color: white;
+  text-decoration: none;
+}
+
+#burger {
+  display: none;
+}
