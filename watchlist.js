@@ -1,14 +1,11 @@
 const http = require('http');
 const url = require('url');
 const https = require('https');
-const eventHandler = require('events');
 
-var watchlist = [];
+const MongoClient = require('mongodb').MongoClient;
+const mongoURL = "mongodb+srv://sliu17:passwordcs20@cs20.zhfqr.mongodb.net/finalprojectyasss?retryWrites=true&w=majority";
 
-// const MongoClient = require('mongodb').MongoClient;
-// const mongoURL = "mongodb+srv://sliu17:passwordcs20@cs20.zhfqr.mongodb.net/finalprojectyasss?retryWrites=true&w=majority";
-
-http.createServer(function (req, res) {
+var server = http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     var pageReq = req.url;
     // Update the pageReq variable to focus on the path section
@@ -46,7 +43,6 @@ function searchAPI(myRes, query) {
         });
         res.on('end', () => {
             data = JSON.parse(data);
-            // console.log(data);
             printResults(myRes, data.Search);
         })
     }).on('error', err => {
@@ -55,24 +51,37 @@ function searchAPI(myRes, query) {
 }
 
 function printResults(res, movies) {
+    div = "<script>var watchlist = []</script>";
     for (i = 0; i < movies.length; i++) {
-        div = "<div id=" + i + ">";
+        div += "<div>";
         div += "<p>" + movies[i].Title + "</p>";
-        div += "<input type = 'button' value = 'Add To Watchlist' onclick = 'eventHandler'/>";
-        res.write(div);
+        div += "<input type='hidden' id='" + i + "'>";
+        div += "<input type='button' id='button" + i + "' value='Add To Watchlist'>";
+        div += "<script>document.getElementById('" + i + "').value = \"" + movies[i].Title + "\";";
+        div += "function addMovie() { console.log('HERE'); watchlist.push(document.getElementById('" + i + "').value); console.log('pushed'); console.log(movieArray);";
+        div += "} document.getElementById('button" + i + "').addEventListener('click',addMovie);";
+        div += "</script>";
+        div += "</div>";
     }
+    // div += "let payload = JSON.stringify(watchlist); xhr.send(payload);";
+    res.write(div);
+    // storeData(watchlist);
 }
 
-// function eventHandler() {
-//     querySelector.
-// }
+function storeData(watchlist) {
+    MongoClient.connect(mongoURL, { useUnifiedTopology: true }, function(err, db) {
+        if(err) { 
+            console.log("Connection err: " + err); return; 
+        }
+        var dbo = db.db("finalprojectyasss");
+        var coll = dbo.collection('users');
 
-// function storeData() {
-//     MongoClient.connect(mongoURL, { useUnifiedTopology: true }, function(err, db) {
-//         if(err) { 
-//             console.log("Connection err: " + err); return; 
-//         }
-//         var dbo = db.db("finalprojectyasss");
-//         var coll = dbo.collection('users');
-//     });
-// }
+        var formattedData = {"watchlist": watchlist};
+
+        coll.insertOne(formattedData, function(err, res) {
+            if(err) { 
+                return console.log("Insert error: " + err); 
+            }
+        });
+    });
+}
