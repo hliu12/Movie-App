@@ -1,6 +1,7 @@
 const http = require('http');
 const url = require('url');
 const https = require('https');
+const StringDecoder = require('string_decoder').StringDecoder;
 
 const MongoClient = require('mongodb').MongoClient;
 const mongoURL = "mongodb+srv://sliu17:passwordcs20@cs20.zhfqr.mongodb.net/finalprojectyasss?retryWrites=true&w=majority";
@@ -23,7 +24,29 @@ var server = http.createServer(function (req, res) {
         var qobj = url.parse(req.url, true).query;
         var uinput = qobj.input;
         // Search for the user's input in the database
-        searchAPI(res, uinput);
+        searchAPI(res, uinput, pageReq);
+        // let buffer = '';
+        // let decoder = new StringDecoder('utf-8');
+
+        // console.log('HERE1');
+
+        // console.log(data);
+        req.on('data', chunk => {
+            console.log(data);
+            console.log('A chunk of data has arrived: ', chunk);
+          });
+
+        // req.on('data', function(data) {
+        //     // buffer += decoder.write(data); 
+        //     console.log('HERE ON');
+        //     console.log(data);
+        //     // console.log(buffer);
+        // })
+        req.on('end', function(){
+            console.log('HERE END');
+            // buffer += decoder.end();
+            // console.log(buffer);
+        })
     }
 }).listen(8080);
 
@@ -34,7 +57,7 @@ function printForm(res) {
     res.write(form);
 }
 
-function searchAPI(myRes, query) {
+function searchAPI(myRes, query, pageReq) {
     const api_url = "https://omdbapi.com/?apikey=4c3128ae&s=" + query;
     https.get(api_url, res => {
         let data = '';
@@ -43,14 +66,14 @@ function searchAPI(myRes, query) {
         });
         res.on('end', () => {
             data = JSON.parse(data);
-            printResults(myRes, data.Search);
+            printResults(myRes, data.Search, pageReq);
         })
     }).on('error', err => {
         console.log("Error: " + err.message);
   })
 }
 
-function printResults(res, movies) {
+function printResults(res, movies, pageReq) {
     div = "<script>var watchlist = []</script>";
     for (i = 0; i < movies.length; i++) {
         div += "<div>";
@@ -58,12 +81,13 @@ function printResults(res, movies) {
         div += "<input type='hidden' id='" + i + "'>";
         div += "<input type='button' id='button" + i + "' value='Add To Watchlist'>";
         div += "<script>document.getElementById('" + i + "').value = \"" + movies[i].Title + "\";";
-        div += "function addMovie() { console.log('HERE'); watchlist.push(document.getElementById('" + i + "').value); console.log('pushed'); console.log(movieArray);";
+        div += "function addMovie() { watchlist.push(document.getElementById('" + i + "').value); console.log(watchlist);";
+        div += "let xhr = new XMLHttpRequest(); xhr.open('POST','/'); xhr.setRequestHeader('Content-Type','application/json');";
+        div += "let payload = JSON.stringify(watchlist); console.log('Payload' + payload); xhr.send(payload);";
         div += "} document.getElementById('button" + i + "').addEventListener('click',addMovie);";
         div += "</script>";
         div += "</div>";
     }
-    // div += "let payload = JSON.stringify(watchlist); xhr.send(payload);";
     res.write(div);
     // storeData(watchlist);
 }
