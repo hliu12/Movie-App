@@ -72,7 +72,7 @@ a {
 #results-div .movie {
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
+  border: 1px solid #fff;
   width: 33%;
 }
 
@@ -95,4 +95,10 @@ a {
 #results-div .movie .add-button {
   position: relative;
   bottom: 0;
+}
+
+@media query (max-width: 575px) {
+    #results-div {
+        display: block;
+    }
 }
