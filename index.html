@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="styles.css" />
     <title>Movie App</title>
     <style>
-        body {
-            background-color: #333;
-        }
         
         #welcome {
             text-align: center;
@@ -22,7 +19,45 @@
             color: #333;
             font-size: 24px;
         }
-      
+        
+        @media(max-width: 575px) {
+            #welcome {
+                font-size: 12px;
+            }
+        }
+        
+        @media screen and (max-width: 800px) {
+            #info-div {
+              flex-wrap: wrap;
+              height: 1000px;
+            }
+            .info-container img {
+                height: 150px;
+            }
+            .info-container {
+              width: 100vw;
+              border-bottom: 1px solid black;
+            }
+            #flavors-info {
+              width: 100%;
+              border-bottom: 1px solid black;
+            }
+            #delivery-info {
+              width: 100%;
+              border-bottom: 1px solid black;
+            }
+            #quality-info {
+              width: 100%;
+              border-bottom: 1px solid black;
+            }
+            #footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+            }
+        }
+        
         * {box-sizing:border-box}
 
         .slideshow-container {
@@ -35,7 +70,6 @@
             display: none;
         }
 
-        /* Next & previous buttons */
         .prev, .next {
           cursor: pointer;
           position: absolute;
@@ -51,18 +85,15 @@
           user-select: none;
         }
 
-        /* Position the "next button" to the right */
         .next {
           right: 0;
           border-radius: 3px 0 0 3px;
         }
 
-        /* On hover, add a black background color with a little bit see-through */
         .prev:hover, .next:hover {
           background-color: rgba(0,0,0,0.8);
         }
 
-        /* Number text (1/3 etc) */
         .numbertext {
           color: #f2f2f2;
           font-size: 12px;
@@ -71,7 +102,6 @@
           top: 0;
         }
 
-        /* The dots/bullets/indicators */
         .dot {
           cursor: pointer;
           height: 15px;
@@ -87,7 +117,6 @@
           background-color: #717171;
         }
 
-        /* Fading animation */
         .fade {
           animation-name: fade;
           animation-duration: 1.5s;
@@ -123,7 +152,7 @@
         }
 
         .info-container img {
-          height: 150px;
+            height: 150px;
         }
 
         .info-header {
@@ -136,21 +165,6 @@
           font-size: 20px;
           font-weight: 300;
         }
-        
-        #footer {
-          height: 50px;
-          background-color: #333;
-          position: relative;
-          margin-top: -50px;
-          width: 100%;
-          vertical-align: center;
-          text-align: center;
-        }
-
-        #footer p {
-          color: #fff;
-          padding-top: 10px;
-      }
         
     </style>
     
@@ -216,37 +230,33 @@
     </div>
     
     <br>
-    <form action = "search.html">
-        <input type = "submit" value = "redirect" class = "button">
-    </form>
     
     <div id="info-div">
       <div class="info-container" id="flavors-info">
-        <h1 class="info-header">Search</h1>
+        <h1 class="info-header"> <a href = "search.html"> Search </a> </h1> 
         <img
-          src="https://www.pinclipart.com/picdir/middle/574-5741991_cupcake-drawing-clip-art-black-and-white-cupcake.png"
+          src="bird.gif"
           alt="placeholder icon"
         />
-        <h2 class="info-desc">Search for a movie from out database</h2>
+        <h2 class="info-desc">Search for a movie from our database</h2>
       </div>
       <div class="info-container" id="delivery-info">
-        <h1 class="info-header">Top Movies</h1>
+        <h1 class="info-header"> <a href = "top-movies.html"> Top Movies </a> </h1>
         <img
-          src="https://ohmycupcakes.com/img/SugarVanBlue.gif"
+          src="movie.jpg"
           alt="placeholder icon"
         />
         <h2 class="info-desc">Check out our most popular movies today!</h2>
       </div>
       <div class="info-container" id="quality-info">
-        <h1 class="info-header">MyList</h1>
+        <h1 class="info-header"> <a href = "my_list.html"> MyList </a> </h1>
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAJoP49r0xDGv_qpfCd8wETvjngCMADDQ9fg&usqp=CAU"
+          src="list.png"
           alt="placeholder icon"
         />
         <h2 class="info-desc">Check your saved movies</h2>
       </div>
     </div>
-    
     <footer id="footer">
       <p> Henry's Movies &copy 2 Liusers 2022 </p>
     </footer>
