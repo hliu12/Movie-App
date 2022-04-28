@@ -29,12 +29,6 @@ async function displayData(data) {
   var formContainer = document.querySelector(".form-container");
   formContainer.style.backgroundColor = "black";
 
-  // Change color to white
-  var label1 = document.getElementById("label1");
-  label1.style.color = "white";
-  var label2 = document.getElementById("label2");
-  label2.style.color = "white";
-
   var ids = await getListIds();
   const resultsDiv = document.getElementById("results-div");
   resultsDiv.innerHTML = "";
