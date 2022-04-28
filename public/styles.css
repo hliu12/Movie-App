@@ -74,3 +74,12 @@ a {
 #results-div .movie h2 {
     text-align: center;
 }
+
+#results-div .movie p {
+    text-align: center;
+}
+
+#results-div .movie .add-button {
+    position: absolute;
+    bottom: 0;
+}
