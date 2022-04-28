@@ -1,14 +1,33 @@
-async function displayWatchList() {
-  const response = await fetch("/getList", { method: "GET" });
+async function displayUsers() {
+  const response = await fetch("/getUsers", { method: "GET" });
   const data = await response.json();
   console.log(data);
-  if (data.length > 0) {
-    displayList(data[0].movies);
+  // for each user in data, create a button
+  var resultsDiv = document.getElementById("results-div");
+  for (let i = 0; i < data.length; i++) {
+    // Make button for each user
+    var button = document.createElement("button");
+    button.innerHTML = data[i].identifier;
+    button.classList.add("user-button");
+    button.setAttribute(
+      "onclick",
+      `displayWatchList(\"${data[i].identifier}\")`
+    );
+    resultsDiv.appendChild(button);
   }
+}
+
+async function displayWatchList(identifier) {
+  const response = await fetch("/getList?identifier=" + identifier, {
+    method: "GET",
+  });
+  const data = await response.json();
+  displayList(data[0].movies);
 }
 
 function displayList(movieArr) {
   const resultsDiv = document.getElementById("results-div");
+  resultsDiv.innerHTML = "";
   for (let i = 0; i < movieArr.length; i++) {
     // Create div and append to parent
     const movie = movieArr[i];
@@ -25,4 +44,4 @@ function displayList(movieArr) {
   }
 }
 
-displayWatchList();
+displayUsers();

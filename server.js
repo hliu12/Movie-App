@@ -35,31 +35,31 @@ app.get("/api", (req, res) => {
   });
 });
 
-app.get("/getList", (req, res) => {
+app.get("/getUsers", (req, res) => {
   MongoClient.connect(
     mongourl,
     { useUnifiedTopology: true },
     function (err, db) {
-      if (err) {
-        console.log("Connection err: " + err);
-        return;
-      }
-      console.log("Connected successfully to server");
+      if (err) throw err;
       var dbo = db.db("final");
       var collection = dbo.collection("users");
 
       // Query for user id
-      collection.find({ identifier: "1" }).toArray(function (err, result) {
-        if (err) throw err;
-        console.log(result);
-        res.send(result);
-        db.close();
-      });
+      collection
+        .find({}, { identifier: 1, movies: 0, _id: 0 })
+        .toArray(function (err, result) {
+          if (err) throw err;
+          console.log(result);
+          res.send(result);
+          db.close();
+        });
     }
   );
 });
 
-app.get("/getIds", (req, res) => {
+app.get("/getList", (req, res) => {
+  var identifier = req.query.identifier;
+  console.log("Identifier: " + identifier);
   MongoClient.connect(
     mongourl,
     { useUnifiedTopology: true },
@@ -74,7 +74,7 @@ app.get("/getIds", (req, res) => {
 
       // Query for user id
       collection
-        .find({ identifier: "1" }, { imdbID: 1 })
+        .find({ identifier: identifier })
         .toArray(function (err, result) {
           if (err) throw err;
           console.log(result);
@@ -87,6 +87,7 @@ app.get("/getIds", (req, res) => {
 
 app.post("/addMovie", (req, res) => {
   var movieId = req.body.imdbID;
+  var identifier = req.body.identifier;
   console.log(movieId);
 
   // Connect to MongoDB
@@ -102,17 +103,8 @@ app.post("/addMovie", (req, res) => {
       var dbo = db.db("final");
       var collection = dbo.collection("users");
 
-      //   collection.insertOne({ movies: [req.body] }, (err, result) => {
-      //     if (err) {
-      //       console.log("Error: " + err);
-      //       return;
-      //     }
-      //     console.log("Inserted 1 document into the collection");
-      //     db.close();
-      //   });
-
       collection.updateOne(
-        { identifier: "1" },
+        { identifier: identifier },
         { $push: { movies: req.body } },
         function (err, result) {
           if (err) {
@@ -128,6 +120,7 @@ app.post("/addMovie", (req, res) => {
 
 app.post("/removeMovie", (req, res) => {
   var movieId = req.body.imdbID;
+  var identifier = req.body.identifier;
   console.log("Removing movie: " + movieId);
   MongoClient.connect(
     mongourl,
@@ -142,7 +135,7 @@ app.post("/removeMovie", (req, res) => {
       var collection = dbo.collection("users");
 
       collection.updateOne(
-        { identifier: "1" },
+        { identifier: identifier },
         { $pull: { movies: { imdbID: movieId } } },
         function (err, result) {
           if (err) {
@@ -163,8 +156,7 @@ app.listen(process.env.port || 3000);
 console.log("Running at Port 3000");
 
 app.post("/identifier", (req, res) => {
-
-// Connect to MongoDB
+  // Connect to MongoDB
   MongoClient.connect(
     mongourl,
     { useUnifiedTopology: true },
@@ -176,25 +168,28 @@ app.post("/identifier", (req, res) => {
       var dbo = db.db("final");
       var collection = dbo.collection("users");
 
-      var newEntry = {identifier: req.body.identifier, movies: []};
+      var newEntry = { identifier: req.body.identifier, movies: [] };
 
-      collection.find({identifier: req.body.identifier}).toArray(function (err, result) {
-        if (err) throw err;
-        if(result.length == 0) {
+      collection
+        .find({ identifier: req.body.identifier })
+        .toArray(function (err, result) {
+          if (err) throw err;
+          if (result.length == 0) {
             collection.insertOne(newEntry, (err, result) => {
-                if (err) {
-                  console.log("Error: " + err);
-                  return;
-                }
+              if (err) {
+                console.log("Error: " + err);
+                return;
+              }
             });
-        }
-        else {
-            collection.find({identifier: req.body.identifier}).toArray(function (err, result) {
+          } else {
+            collection
+              .find({ identifier: req.body.identifier })
+              .toArray(function (err, result) {
                 if (err) throw err;
                 res.send(result);
               });
-        }
-      });
+          }
+        });
     }
   );
-})
+});

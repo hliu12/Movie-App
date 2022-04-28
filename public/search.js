@@ -1,7 +1,23 @@
+var identifier = document.getElementById("identifier").value;
+
 const button = document.getElementById("search-button");
 button.addEventListener("click", getData);
 
 async function getData() {
+  var uinput = document.getElementById("identifier").value;
+  identifier = uinput;
+  if (identifier == "") {
+    alert("Please enter a list name!");
+    return;
+  }
+  console.log(identifier);
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "/identifier");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  const payload = JSON.stringify({ identifier: uinput });
+  // console.log("Payload" + payload);
+  xhr.send(payload);
+
   const searchTerm = document.getElementById("search").value;
   const response = await fetch("/api?search=" + searchTerm, { method: "GET" });
   const data = await response.json();
@@ -11,6 +27,7 @@ async function getData() {
 async function displayData(data) {
   var ids = await getListIds();
   const resultsDiv = document.getElementById("results-div");
+  console.log(ids);
   resultsDiv.innerHTML = "";
   for (let i = 0; i < data.Search.length; i++) {
     // Create div and append to parent
@@ -40,16 +57,23 @@ async function displayData(data) {
 }
 
 function addMovie(movie, id) {
-  console.log(movie);
-
+  if (typeof movie == "string") {
+    console.log("movie is string");
+    var movieId = movie;
+  } else {
+    var movieId = movie.id;
+  }
+  // console.log(movieId);
+  // var movieId = movie.id;
+  console.log(movieId);
   var button = document.getElementById(id);
   button.innerHTML = "Remove from Watchlist";
   button.classList.remove("add-button");
   button.classList.add("remove-button");
   button.removeEventListener("onclick", addMovie);
-  button.setAttribute("onclick", `removeMovie('${movie}', this.id)`);
+  button.setAttribute("onclick", `removeMovie('${movieId}', this.id)`);
 
-  const api_url = "https://omdbapi.com/?apikey=4c3128ae&i=" + movie.id;
+  const api_url = "https://omdbapi.com/?apikey=4c3128ae&i=" + movieId;
 
   fetch(api_url)
     .then((res) => res.json())
@@ -57,7 +81,9 @@ function addMovie(movie, id) {
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "/addMovie");
       xhr.setRequestHeader("Content-Type", "application/json");
-      const payload = JSON.stringify(data);
+      var myData = Object.assign(data, { identifier: identifier });
+      console.log(myData);
+      const payload = JSON.stringify(myData);
       xhr.send(payload);
     });
 }
@@ -66,7 +92,7 @@ function removeMovie(movieId, id) {
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "/removeMovie");
   xhr.setRequestHeader("Content-Type", "application/json");
-  const payload = JSON.stringify({ imdbID: movieId });
+  const payload = JSON.stringify({ imdbID: movieId, identifier: identifier });
   console.log(payload);
   xhr.send(payload);
 
@@ -79,8 +105,13 @@ function removeMovie(movieId, id) {
 }
 
 async function getListIds() {
-  const response = await fetch("/getIds", { method: "GET" });
+  // fetch from /getList with identifier
+  const response = await fetch("/getList?identifier=" + identifier, {
+    method: "GET",
+  });
   const data = await response.json();
+  console.log(data);
+
   var ids = [];
   if (data.length > 0) {
     var movies = data[0].movies;
@@ -88,6 +119,7 @@ async function getListIds() {
       ids.push(movies[i].imdbID);
     }
   }
+  console.log(ids);
 
   return ids;
 }
