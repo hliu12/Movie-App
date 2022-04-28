@@ -20,6 +20,11 @@ body {
 #header {
   height: 70px;
   background-color: #ffd700;
+  font-family: cinema;
+}
+
+h1 {
+  font-family: cinema;
 }
 
 #header-list {
