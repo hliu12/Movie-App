@@ -43,16 +43,57 @@ app.get("/api", (req, res) => {
   //   });
 });
 
-// app.get("/movieData", (req, res) => {
-//   console.log("Movie data function ran");
-//   console.log(req.body);
-// });
+app.get("/getList", (req, res) => {
+  MongoClient.connect(
+    mongourl,
+    { useUnifiedTopology: true },
+    function (err, db) {
+      if (err) {
+        console.log("Connection err: " + err);
+        return;
+      }
+      console.log("Connected successfully to server");
+      var dbo = db.db("final");
+      var collection = dbo.collection("users");
+
+      // Query for user id
+      collection.find({ user_id: 1 }).toArray(function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
+        db.close();
+      });
+    }
+  );
+});
+
+app.get("/getIds", (req, res) => {
+  MongoClient.connect(
+    mongourl,
+    { useUnifiedTopology: true },
+    function (err, db) {
+      if (err) {
+        console.log("Connection err: " + err);
+        return;
+      }
+      console.log("Connected successfully to server");
+      var dbo = db.db("final");
+      var collection = dbo.collection("users");
+
+      // Query for user id
+      collection
+        .find({ user_id: 1 }, { imdbID: 1 })
+        .toArray(function (err, result) {
+          if (err) throw err;
+          console.log(result);
+          res.send(result);
+          db.close();
+        });
+    }
+  );
+});
 
 app.post("/addMovie", (req, res) => {
-  //   console.log("req: " + req.body);
-  //   console.log("req.body.title: " + req.body.Title);
-  //   var stringRes = JSON.stringify(req.body);
-  //   console.log(stringRes);
   var movieId = req.body.imdbID;
   console.log(movieId);
 
@@ -69,26 +110,26 @@ app.post("/addMovie", (req, res) => {
       var dbo = db.db("final");
       var collection = dbo.collection("users");
 
-      collection.insertOne({ movies: [req.body] }, (err, result) => {
-        if (err) {
-          console.log("Error: " + err);
-          return;
-        }
-        console.log("Inserted 1 document into the collection");
-        db.close();
-      });
-
-      //   collection.updateOne(
-      //     { user_id: 1 },
-      //     { $push: { movies: movieId } },
-      //     function (err, result) {
-      //       if (err) {
-      //         console.log("Error: " + err);
-      //       } else {
-      //         console.log("Success: " + result);
-      //       }
+      //   collection.insertOne({ movies: [req.body] }, (err, result) => {
+      //     if (err) {
+      //       console.log("Error: " + err);
+      //       return;
       //     }
-      //   );
+      //     console.log("Inserted 1 document into the collection");
+      //     db.close();
+      //   });
+
+      collection.updateOne(
+        { user_id: 1 },
+        { $push: { movies: req.body } },
+        function (err, result) {
+          if (err) {
+            console.log("Error: " + err);
+          } else {
+            console.log("Success: " + result);
+          }
+        }
+      );
 
       //   db.close();
     }

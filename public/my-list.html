@@ -27,40 +27,9 @@
       </ul>
     </header>
     My List
+
+    <div id="results-div"></div>
+
+    <script src="my-list.js"></script>
   </body>
 </html>
-
-
-
-
-<body onload="displayTopMovies()">
-
-</body>
-
-function displayTopMovies()
-{
-    MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
-        if(err) { 
-            console.log("Connection err: " + err); return; 
-        }
-      
-        var dbo = db.db("textbooks");
-        var coll = dbo.collection('books');
-        console.log("before find");
-    
-        Query = {{userid:"1"},{movies: ""}};
-        coll.find(Query).toArray(function(err, items) {
-          if (err) {
-            console.log("Error: " + err);
-          } 
-          else 
-          {
-            console.log("Items: ");
-            for (i=0; i<items.length; i++)
-                console.log(i + ": " + items[i].movies;				
-          }   
-          db.close();
-        console.log("after close");
-        });	
-    });
-}
