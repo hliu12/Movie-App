@@ -90,6 +90,7 @@ a {
 
 #results-div .movie h2 {
   text-align: center;
+  font-family: JumboX;
   color: black;
   margin-top: 10px;
   height: 30px;
@@ -98,7 +99,7 @@ a {
 
 #results-div .movie p {
   color: black;
-
+  font-family: JumboX;
   text-align: center;
 }
 
@@ -110,6 +111,11 @@ a {
   height: 250px;
   margin-bottom: 20px;
   margin-top: 15px;
+}
+
+#results-div .movie button {
+  font-family: search;
+  font-size: 15px;
 }
 
 #results-div .movie .add-button .remove-button {
@@ -135,19 +141,22 @@ a {
 }
 
 @font-face {
- font-family: search;
- src: url(search.ttf);
+  font-family: search;
+  src: url(search.ttf);
 }
 
 button {
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.8);
-  background: rgb(182, 157, 92);
+  font-family: JumboX;
+  font-size: 19px;
+  font-weight: bold;
+  color: black;
+  background: #ffd700;
   transition: all 0.2s ease-in-out;
 }
 
 button:hover {
-  color: rgba(255, 255, 255, 1);
+  color: rgb(250, 49, 49);
   box-shadow: 0 5px 15px rgba(116, 104, 17, 0.4);
 }
 

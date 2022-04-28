@@ -27,8 +27,15 @@ async function getData() {
 async function displayData(data) {
   var searchTitle = document.getElementById("search-title");
   searchTitle.parentNode.removeChild(searchTitle);
+  // add black background
+  var formContainer = document.querySelector(".form-container");
+  formContainer.style.backgroundColor = "black";
 
-  
+  // Change color to white
+  var label1 = document.getElementById("label1");
+  label1.style.color = "white";
+  var label2 = document.getElementById("label2");
+  label2.style.color = "white";
 
   var ids = await getListIds();
   const resultsDiv = document.getElementById("results-div");

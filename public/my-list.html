@@ -14,7 +14,7 @@
       #list-header {
         height: 100px;
         line-height: 100px;
-        background-color: yellow;
+        background-color: black;
       }
 
       #list-header h1 {
@@ -32,6 +32,25 @@
         width: 300px;
         height: 100px;
         margin: 20px;
+      }
+
+      #user-list {
+        color: #ffd700;
+        font-family: search;
+      }
+
+      #big-div {
+        display: flex;
+        justify-content: center;
+      }
+
+      body {
+        color: #fff;
+        background-image: url("./img/theatre.webp");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
       }
     </style>
   </head>
@@ -54,7 +73,9 @@
       </h1>
     </div>
 
-    <div id="results-div"></div>
+    <div id="big-div">
+      <div id="results-div"></div>
+    </div>
 
     <script src="my-list.js"></script>
   </body>

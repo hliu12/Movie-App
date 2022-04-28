@@ -44,8 +44,8 @@
         height: 50px;
         justify-content: center;
         align-items: center;
-        margin-bottom: 20px;
-        margin-top: 10px;
+        padding-bottom: 20px;
+        padding-top: 10px;
         /* background-color: black; */
       }
       #search,
@@ -57,6 +57,7 @@
 
       #identifier {
         width: 125px;
+        margin-right: 7px;
       }
 
       #search {
@@ -76,7 +77,7 @@
       }
 
       label {
-        font-family:
+        font-family: search;
         font-size: 17px;
         color: black;
       }
@@ -107,37 +108,32 @@
           <li><a href="search.html">Search Movies</a></li>
           <li><a href="my-list.html">My List</a></li>
         </div>
-        <div id="burger">
-          <div id="line1"></div>
-          <div id="line2"></div>
-          <div id="line3"></div>
-        </div>
       </ul>
     </header>
-    <div class="all-container">
-      <div id="prompt">
-        <h1 id="search-title">BUILD YOUR VERY OWN COLLECTION</h1>
-      </div>
-      <div class="form-container">
-        <form onSubmit="return false;">
-          <label> Collection Name:</label>
-          <input
-            type="text"
-            id="identifier"
-            name="userId"
-            placeholder="e.g. Henry's List"
-          />
-          <label> Search Movies:</label>
-          <input
-            type="text"
-            id="search"
-            name="search"
-            placeholder="e.g. The Avengers"
-          />
-          <input type="submit" id="search-button" value="Search" />
-        </form>
-      </div>
+    <!-- <div class="all-container"> -->
+    <div id="prompt">
+      <h1 id="search-title">BUILD YOUR VERY OWN COLLECTION</h1>
     </div>
+    <div class="form-container">
+      <form onSubmit="return false;">
+        <label id="label1"> Collection Name:</label>
+        <input
+          type="text"
+          id="identifier"
+          name="userId"
+          placeholder="e.g. Henry's List"
+        />
+        <label id="label2"> Search Movies:</label>
+        <input
+          type="text"
+          id="search"
+          name="search"
+          placeholder="e.g. The Avengers"
+        />
+        <input type="submit" id="search-button" value="Search" />
+      </form>
+    </div>
+    <!-- </div> -->
     <script src="process.js"></script>
 
     <div id="results-div"></div>
