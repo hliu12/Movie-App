@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>Movie App</title>
+    <title>Log In Page</title>
   </head>
-  <body class="login">
+  <body>
     <header id="header">
       <ul id="header-list">
         <div id="logo">
-          <a href="/">My Watchlist</a>
+          <a href="index.html">My Watchlist</a>
         </div>
         <div id="header-items">
           <li><a href="search.html">Search Movies</a></li>
@@ -26,25 +26,13 @@
         </div>
       </ul>
     </header>
+    Search Page
 
-    <div class="container">
-      <h2 class="text-center">Login</h2>
-      <br />
-      <form action="/dashboard.html" class="loginForm">
-        <div class="input-group">
-          <label for="username" class="label">Username</label>
-          <input type="text" id="username" class="input" />
-          <span class="error-message"></span>
-        </div>
-        <br />
-        <div class="input-group">
-          <label for="password" class="label">Password</label>
-          <input type="password" id="password" class="input" />
-          <span class="error-message"></span>
-        </div>
-        <br />
-        <button class="button" type="submit">Login</button>
-      </form>
-    </div>
+    <form onSubmit="return false;">
+      Unique Movie Collection Name:<input type="text" id="identifier" name="userId"/>
+      <input type="submit" id="idButton" value="Submit"/>
+    </form>
+
+    <script src="search.js"></script>
   </body>
 </html>
