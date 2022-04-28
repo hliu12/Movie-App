@@ -28,41 +28,13 @@
     </header>
     Search Page
 
-    <input type="search" id="search-bar" name="henry" />
-    <button id="search-button">Search</button>
+    <form onSubmit="return false;">
+      <input type="text" id="search" name="search" />
+      <input type="submit" id="search-button" value="Search" />
+    </form>
 
     <div id="results-div"></div>
 
-    <script>
-      function printResults(movies) {
-        movies.forEach((movie) => {
-          let div = document.createElement("div");
-          div.innerHTML = movie.Title;
-          document.getElementById("results-div").appendChild(div);
-        });
-      }
-
-      function search() {
-        console.log("Search function ran");
-        var query = document.getElementById("search-bar").value;
-        console.log(query);
-        connectAPI(query);
-      }
-
-      function connectAPI(query) {
-        var url = "https://omdbapi.com/?apikey=4c3128ae&s=" + query;
-        console.log(url);
-        res = fetch(url)
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data.Search);
-            printResults(data.Search);
-          });
-      }
-
-      document
-        .getElementById("search-button")
-        .addEventListener("click", search);
-    </script>
+    <script src="search.js"></script>
   </body>
 </html>
