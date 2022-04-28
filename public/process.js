@@ -1,5 +1,5 @@
 // console.log(document.getElementById(identifier).value);
-document.getElementById('idButton').addEventListener('click', function() {
+document.getElementById('search-button').addEventListener('onsubmit', function() {
     var uinput = document.getElementById('identifier').value;
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/identifier");
