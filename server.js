@@ -33,14 +33,6 @@ app.get("/api", (req, res) => {
       res.send(body);
     });
   });
-
-  //   request(api_url, function (error, response, body) {
-  //     if (!error && response.statusCode == 200) {
-  //       var data = JSON.parse(body);
-  //       console.log(data);
-  //       res.json(data);
-  //     }
-  //   });
 });
 
 app.get("/getList", (req, res) => {
@@ -130,11 +122,42 @@ app.post("/addMovie", (req, res) => {
           }
         }
       );
+    }
+  );
+});
+
+app.post("/removeMovie", (req, res) => {
+  var movieId = req.body.imdbID;
+  console.log("Removing movie: " + movieId);
+  MongoClient.connect(
+    mongourl,
+    { useUnifiedTopology: true },
+    function (err, db) {
+      if (err) {
+        console.log("Connection err: " + err);
+        return;
+      }
+      console.log("Connected successfully to server");
+      var dbo = db.db("final");
+      var collection = dbo.collection("users");
+
+      collection.deleteOne(
+        { movies: { $elemMatch: { imdbID: movieId } } },
+        { $push: { movies: req.body } },
+        function (err, result) {
+          if (err) {
+            console.log("Error: " + err);
+          } else {
+            console.log("Success: " + result);
+          }
+        }
+      );
 
       //   db.close();
     }
   );
 });
+
 //add the router
 app.use("/", router);
 app.listen(process.env.port || 3000);

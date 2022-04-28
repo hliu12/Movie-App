@@ -7,9 +7,14 @@ a {
   text-decoration: none;
 }
 
+body {
+    background-color: #333;
+    height: 100%;
+}
+
 #header {
-  height: 75px;
-  background-color: yellow;
+  height: 70px;
+  background-color: #FFD700;
 }
 
 #header-list {
@@ -39,4 +44,33 @@ a {
 
 #burger {
   display: none;
+}
+
+#footer {
+  height: 50px;
+  background-color: #333;
+  width: 100%;
+  vertical-align: center;
+  text-align: center;
+}
+
+#footer p {
+  color: #fff;
+  padding-top: 10px;
+}
+
+a {
+  color: #333;
+}
+
+#results-div {
+    flex-wrap: wrap;
+}
+
+#results-div .movie {
+    width: 50%;
+}
+
+#results-div .movie h2 {
+    text-align: center;
 }
