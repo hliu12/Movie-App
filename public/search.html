@@ -5,7 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>Search Movies</title>
+    <title> Search Movies </title>
+    <style>
+        body {
+            color: #fff;
+        }
+        #header {
+            margin-bottom: 20px;
+        }
+        #search-button {
+            margin-top: 10px;
+        }
+        #search {
+            width: 20%;
+            margin-left: 8px;
+        }
+        #prompt {
+            padding-left: 10px;
+        }
+        #prompt input {
+            width: 50%;
+            clear:both;
+        }
+        
+        
+    </style>
+    
   </head>
   <body>
     <header id="header">
@@ -26,7 +51,10 @@
         </div>
       </ul>
     </header>
-    Search Page
+    <div id = prompt>
+        <h1> Search for a movie: </h1>
+        
+    </div>
 
     <form onSubmit="return false;">
       <input type="text" id="search" name="search" />
