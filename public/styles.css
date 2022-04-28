@@ -8,6 +8,11 @@
   src: url(Jumbox-ZVLMZ.ttf);
 }
 
+@font-face {
+  font-family: Marvel;
+  src: url(MarvelRegular-Dj83.ttf);
+}
+
 a {
   text-decoration: none;
 }
@@ -137,6 +142,10 @@ button {
 button:hover {
   color: rgba(255, 255, 255, 1);
   box-shadow: 0 5px 15px rgba(116, 104, 17, 0.4);
+}
+
+#search-title {
+    font-family: Marvel, sans-serif;
 }
 
 @media query (max-width: 575px) {
