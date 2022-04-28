@@ -9,11 +9,11 @@
     <style>
       body {
         color: #fff;
-        background-image: url("./img/theater.webp");
-        background-size: 150px;
-      }
-      #header {
-        margin-bottom: 20px;
+        background-image: url("./img/theatre.webp");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
       }
       #search-button {
         margin-top: 10px;
@@ -37,8 +37,10 @@
         clear: both;
       }
       .form-container {
-        margin: auto;
-        width: 40%;
+        display: flex;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
       }
       #identifier {
         width: 20%;
@@ -85,7 +87,7 @@
     </header>
     <div class="all-container">
       <div id="prompt">
-        <h1>Build Your Very Own Movie Collection:</h1>
+        <h1 id="search-title">Build Your Very Own Movie Collection:</h1>
       </div>
       <div class="form-container">
         <form onSubmit="return false;">

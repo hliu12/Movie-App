@@ -25,6 +25,9 @@ async function getData() {
 }
 
 async function displayData(data) {
+  var searchTitle = document.getElementById("search-title");
+  searchTitle.parentNode.removeChild(searchTitle);
+
   var ids = await getListIds();
   const resultsDiv = document.getElementById("results-div");
   resultsDiv.innerHTML = "";
