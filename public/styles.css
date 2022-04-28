@@ -106,6 +106,12 @@ a {
   padding-top: 8px;
 }
 
+#mylist-div {
+    margin: 12px;
+    max-width: 50px;
+    max-height: 20px;
+}
+
 @media query (max-width: 575px) {
   #results-div {
     display: block;
