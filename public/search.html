@@ -28,7 +28,10 @@
       }
       #prompt h1 {
         text-align: center;
-        font-size: 60px;
+        font-size: 80px;
+        color: yellow;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: black;
         padding-top: 160px;
         padding-bottom: 20px;
       }
@@ -41,15 +44,41 @@
         height: 50px;
         justify-content: center;
         align-items: center;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        /* background-color: black; */
       }
+      #search,
       #identifier {
-        width: 20%;
+        text-indent: 10px;
+        height: 40px;
+        border-radius: 25px;
       }
+
+      #identifier {
+        width: 125px;
+      }
+
       #search {
-        width: 20%;
+        width: 400px;
       }
+
+      #search-button {
+        width: 100px;
+        height: 42px;
+        border-radius: 25px;
+        background-color: #ffd700;
+        color: #333;
+        font-size: 15px;
+        font-weight: bold;
+        border: none;
+        border: 2px solid #333;
+      }
+
       label {
+        font-family:
         font-size: 17px;
+        color: black;
       }
 
       @media (max-width: 575px) {
@@ -87,13 +116,24 @@
     </header>
     <div class="all-container">
       <div id="prompt">
-        <h1 id="search-title">Build Your Very Own Movie Collection:</h1>
+        <h1 id="search-title">BUILD YOUR VERY OWN COLLECTION</h1>
       </div>
       <div class="form-container">
         <form onSubmit="return false;">
-          <label> Unique Movie Collection Name:</label>
-          <input type="text" id="identifier" name="userId" />
-          <input type="text" id="search" name="search" />
+          <label> Collection Name:</label>
+          <input
+            type="text"
+            id="identifier"
+            name="userId"
+            placeholder="e.g. Henry's List"
+          />
+          <label> Search Movies:</label>
+          <input
+            type="text"
+            id="search"
+            name="search"
+            placeholder="e.g. The Avengers"
+          />
           <input type="submit" id="search-button" value="Search" />
         </form>
       </div>

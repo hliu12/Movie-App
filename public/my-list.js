@@ -19,7 +19,7 @@ async function displayUsers() {
 
 async function displayWatchList(identifier) {
   var userList = document.getElementById("user-list");
-  userList.innerHTML = identifier + "'s Watchlist";
+  userList.innerHTML = identifier;
   const response = await fetch("/getList?identifier=" + identifier, {
     method: "GET",
   });
