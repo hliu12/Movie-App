@@ -8,13 +8,13 @@ a {
 }
 
 body {
-    background-color: #333;
-    height: 100%;
+  background-color: #333;
+  height: 100%;
 }
 
 #header {
   height: 70px;
-  background-color: #FFD700;
+  background-color: #ffd700;
 }
 
 #header-list {
@@ -64,30 +64,35 @@ a {
 }
 
 #results-div {
-    flex-wrap: wrap;
-    float: left;
+  display: flex;
+  flex-wrap: wrap;
+  float: left;
 }
 
 #results-div .movie {
-    width: 50%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  width: 33%;
 }
 
 #results-div .movie h2 {
-    text-align: center;
+  text-align: center;
+  height: 50px;
 }
 
 #results-div .movie p {
-    text-align: center;
+  text-align: center;
 }
 
 #results-div .movie img {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 #results-div .movie .add-button {
-    position: relative;
-    bottom: 0;
+  position: relative;
+  bottom: 0;
 }

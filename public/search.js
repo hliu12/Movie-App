@@ -32,7 +32,7 @@ async function displayData(data) {
     <h2>${movie.Title}</h2>
     <p>${movie.Year}</p>
     <img src="${movie.Poster}"/>
-    <button onClick="addMovie(${movieId})">Add to Watchlist</button>
+    <button class="add-button" onClick="addMovie(${movieId})">Add to Watchlist</button>
     `;
     }
     resultsDiv.appendChild(movieDiv);
