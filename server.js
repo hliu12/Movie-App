@@ -7,7 +7,7 @@ const router = express.Router();
 const https = require("https");
 const MongoClient = require("mongodb").MongoClient;
 const mongourl =
-  "mongodb+srv://testUser:Sparky64@cluster0.zxgod.mongodb.net/stockTicker?retryWrites=true&w=majority";
+  "mongodb+srv://sliu17:passwordcs20@cs20.zhfqr.mongodb.net/final?retryWrites=true&w=majority";
 
 // serve files from the public directory
 app.use(express.static("public"));
@@ -49,10 +49,12 @@ app.get("/api", (req, res) => {
 // });
 
 app.post("/addMovie", (req, res) => {
-  console.log("req: " + req.body);
-  console.log("req.body.title: " + req.body.Title);
-  var stringRes = JSON.stringify(req.body);
-  console.log(stringRes);
+  //   console.log("req: " + req.body);
+  //   console.log("req.body.title: " + req.body.Title);
+  //   var stringRes = JSON.stringify(req.body);
+  //   console.log(stringRes);
+  var movieId = req.body.imdbID;
+  console.log(movieId);
 
   // Connect to MongoDB
   MongoClient.connect(
@@ -67,7 +69,28 @@ app.post("/addMovie", (req, res) => {
       var dbo = db.db("final");
       var collection = dbo.collection("users");
 
-      db.close();
+      collection.insertOne({ movies: [req.body] }, (err, result) => {
+        if (err) {
+          console.log("Error: " + err);
+          return;
+        }
+        console.log("Inserted 1 document into the collection");
+        db.close();
+      });
+
+      //   collection.updateOne(
+      //     { user_id: 1 },
+      //     { $push: { movies: movieId } },
+      //     function (err, result) {
+      //       if (err) {
+      //         console.log("Error: " + err);
+      //       } else {
+      //         console.log("Success: " + result);
+      //       }
+      //     }
+      //   );
+
+      //   db.close();
     }
   );
 });
