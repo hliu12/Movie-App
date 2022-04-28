@@ -112,6 +112,18 @@ a {
   max-height: 20px;
 }
 
+button {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgb(182, 157, 92);
+    transition: all 0.2s ease-in-out;
+  }
+
+button:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px rgba(116, 104, 17, 0.4);
+}
+
 @media query (max-width: 575px) {
   #results-div {
     display: block;
