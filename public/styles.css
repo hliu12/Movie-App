@@ -136,7 +136,7 @@ a {
 
 @font-face {
  font-family: search;
- src: url('search.ttf);
+ src: url(search.ttf);
 }
 
 button {
