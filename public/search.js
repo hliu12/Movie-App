@@ -10,12 +10,10 @@ async function getData() {
     alert("Please enter a list name!");
     return;
   }
-  console.log(identifier);
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "/identifier");
   xhr.setRequestHeader("Content-Type", "application/json");
   const payload = JSON.stringify({ identifier: uinput });
-  // console.log("Payload" + payload);
   xhr.send(payload);
 
   const searchTerm = document.getElementById("search").value;
