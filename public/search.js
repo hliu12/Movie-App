@@ -25,21 +25,30 @@ async function displayData(data) {
       <h2>${movie.Title}</h2>
       <p>${movie.Year}</p>
       <img src="${movie.Poster}"/>
-      <button class="remove-button" onclick="removeMovie('${movieId}')">Remove from Watchlist</button>
+      <button id="button${i}" class="remove-button" onclick="removeMovie('${movieId}', this.id)">Remove from Watchlist</button>
       `;
     } else {
       movieDiv.innerHTML = `
     <h2>${movie.Title}</h2>
     <p>${movie.Year}</p>
     <img src="${movie.Poster}"/>
-    <button class="add-button" onClick="addMovie(${movieId})">Add to Watchlist</button>
+    <button id="button${i}" class="add-button" onClick="addMovie(${movieId}, this.id)">Add to Watchlist</button>
     `;
     }
     resultsDiv.appendChild(movieDiv);
   }
 }
 
-function addMovie(movie) {
+function addMovie(movie, id) {
+  console.log(movie);
+
+  var button = document.getElementById(id);
+  button.innerHTML = "Remove from Watchlist";
+  button.classList.remove("add-button");
+  button.classList.add("remove-button");
+  button.removeEventListener("onclick", addMovie);
+  button.setAttribute("onclick", `removeMovie('${movie}', this.id)`);
+
   const api_url = "https://omdbapi.com/?apikey=4c3128ae&i=" + movie.id;
 
   fetch(api_url)
@@ -53,13 +62,20 @@ function addMovie(movie) {
     });
 }
 
-function removeMovie(movieId) {
+function removeMovie(movieId, id) {
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "/removeMovie");
   xhr.setRequestHeader("Content-Type", "application/json");
   const payload = JSON.stringify({ imdbID: movieId });
   console.log(payload);
   xhr.send(payload);
+
+  var button = document.getElementById(id);
+  button.innerHTML = "Add to Watchlist";
+  button.classList.remove("remove-button");
+  button.classList.add("add-button");
+  button.removeEventListener("onclick", removeMovie);
+  button.setAttribute("onclick", `addMovie('${movieId}', this.id)`);
 }
 
 async function getListIds() {

@@ -1,7 +1,7 @@
 async function displayWatchList() {
   const response = await fetch("/getList", { method: "GET" });
   const data = await response.json();
-  //   console.log(data);
+  console.log(data);
   if (data.length > 0) {
     displayList(data[0].movies);
   }

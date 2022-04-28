@@ -49,7 +49,7 @@ app.get("/getList", (req, res) => {
       var collection = dbo.collection("users");
 
       // Query for user id
-      collection.find({ user_id: 1 }).toArray(function (err, result) {
+      collection.find({ identifier: "1" }).toArray(function (err, result) {
         if (err) throw err;
         console.log(result);
         res.send(result);
@@ -74,7 +74,7 @@ app.get("/getIds", (req, res) => {
 
       // Query for user id
       collection
-        .find({ user_id: 1 }, { imdbID: 1 })
+        .find({ identifier: "1" }, { imdbID: 1 })
         .toArray(function (err, result) {
           if (err) throw err;
           console.log(result);
@@ -112,7 +112,7 @@ app.post("/addMovie", (req, res) => {
       //   });
 
       collection.updateOne(
-        { user_id: 1 },
+        { identifier: "1" },
         { $push: { movies: req.body } },
         function (err, result) {
           if (err) {
@@ -141,9 +141,9 @@ app.post("/removeMovie", (req, res) => {
       var dbo = db.db("final");
       var collection = dbo.collection("users");
 
-      collection.deleteOne(
-        { movies: { $elemMatch: { imdbID: movieId } } },
-        { $push: { movies: req.body } },
+      collection.updateOne(
+        { identifier: "1" },
+        { $pull: { movies: { imdbID: movieId } } },
         function (err, result) {
           if (err) {
             console.log("Error: " + err);
