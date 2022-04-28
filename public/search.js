@@ -66,14 +66,10 @@ async function displayData(data) {
 
 function addMovie(movie, id) {
   if (typeof movie == "string") {
-    console.log("movie is string");
     var movieId = movie;
   } else {
     var movieId = movie.id;
   }
-  // console.log(movieId);
-  // var movieId = movie.id;
-  console.log(movieId);
   var button = document.getElementById(id);
   button.innerHTML = "Remove from Watchlist";
   button.classList.remove("add-button");
@@ -90,7 +86,6 @@ function addMovie(movie, id) {
       xhr.open("POST", "/addMovie");
       xhr.setRequestHeader("Content-Type", "application/json");
       var myData = Object.assign(data, { identifier: identifier });
-      console.log(myData);
       const payload = JSON.stringify(myData);
       xhr.send(payload);
     });
@@ -101,7 +96,6 @@ function removeMovie(movieId, id) {
   xhr.open("POST", "/removeMovie");
   xhr.setRequestHeader("Content-Type", "application/json");
   const payload = JSON.stringify({ imdbID: movieId, identifier: identifier });
-  console.log(payload);
   xhr.send(payload);
 
   var button = document.getElementById(id);
@@ -118,7 +112,6 @@ async function getListIds() {
     method: "GET",
   });
   const data = await response.json();
-  console.log(data);
 
   var ids = [];
   if (data.length > 0) {
@@ -127,7 +120,6 @@ async function getListIds() {
       ids.push(movies[i].imdbID);
     }
   }
-  console.log(ids);
 
   return ids;
 }
