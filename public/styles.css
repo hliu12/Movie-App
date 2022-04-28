@@ -107,7 +107,7 @@ a {
 }
 
 @media query (max-width: 575px) {
-    #results-div {
-        display: block;
-    }
+  #results-div {
+    display: block;
+  }
 }
