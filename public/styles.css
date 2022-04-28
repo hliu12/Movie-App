@@ -79,6 +79,7 @@ a {
 #results-div .movie h2 {
   text-align: center;
   height: 50px;
+  line-height: 50px;
 }
 
 #results-div .movie p {
@@ -89,8 +90,8 @@ a {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
 }
 
 #results-div .movie .add-button {
