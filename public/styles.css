@@ -132,6 +132,11 @@ a {
   max-height: 20px;
 }
 
+@font-face {
+ font-family: search;
+ src: url('search.ttf);
+}
+
 button {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
