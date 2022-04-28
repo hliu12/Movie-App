@@ -27,8 +27,13 @@ async function getData() {
 async function displayData(data) {
   var ids = await getListIds();
   const resultsDiv = document.getElementById("results-div");
-  console.log(ids);
   resultsDiv.innerHTML = "";
+
+  if (data.Response == "False") {
+    alert("No results found! Try another search.");
+    return;
+  }
+
   for (let i = 0; i < data.Search.length; i++) {
     // Create div and append to parent
     const movie = data.Search[i];

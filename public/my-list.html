@@ -10,11 +10,28 @@
       div {
         display: block;
       }
-      
-      #container {
+
+      #list-header {
+        height: 100px;
+        line-height: 100px;
+        background-color: yellow;
+      }
+
+      #list-header h1 {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      #results-div {
+        padding-top: 20px;
         display: flex;
-        justify-content: center;
-        position: relative;
+      }
+
+      #results-div button {
+        width: 300px;
+        height: 100px;
+        margin: 20px;
       }
     </style>
   </head>
@@ -30,12 +47,14 @@
         </div>
       </ul>
     </header>
-    <div id="container">
-      <div id="h1div">
-        <h1>Check out what other people are watching!</h1>
-      </div>
-      <div id="results-div"></div>
+
+    <div id="list-header">
+      <h1 id="user-list">
+        Feeling uninspired? Check out what other people are watching!
+      </h1>
     </div>
+
+    <div id="results-div"></div>
 
     <script src="my-list.js"></script>
   </body>

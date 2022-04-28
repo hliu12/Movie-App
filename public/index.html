@@ -146,10 +146,14 @@
         width: 40%;
       }
 
+      #info-div-container {
+        display: flex;
+      }
+
       #info-div {
         display: flex;
         height: 350px;
-        width: 85%;
+        justify-content: center;
         margin: auto;
       }
 
@@ -172,15 +176,18 @@
       }
 
       .info-desc {
+        width: 300px;
         margin-top: 25px;
         margin-bottom: 25px;
         font-size: 20px;
         font-weight: 300;
       }
 
-      h1 {
+      h1, h2 {
         font-family: Jumbox;
       }
+
+
     </style>
   </head>
   <body>
@@ -240,8 +247,8 @@
     </div>
 
     <br />
-
-    <div id="info-div">
+    <div class="info-div-container">
+      <div id="info-div">
       <div class="info-container" id="flavors-info">
         <h1 class="info-header"><a href="search.html"> Search </a></h1>
         <img src="../img/bird.gif" alt="placeholder icon" />
