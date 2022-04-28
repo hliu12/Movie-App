@@ -152,8 +152,6 @@ app.post("/removeMovie", (req, res) => {
           }
         }
       );
-
-      //   db.close();
     }
   );
 });
@@ -163,3 +161,40 @@ app.use("/", router);
 app.listen(process.env.port || 3000);
 
 console.log("Running at Port 3000");
+
+app.post("/identifier", (req, res) => {
+
+// Connect to MongoDB
+  MongoClient.connect(
+    mongourl,
+    { useUnifiedTopology: true },
+    function (err, db) {
+      if (err) {
+        console.log("Connection err: " + err);
+        return;
+      }
+      var dbo = db.db("final");
+      var collection = dbo.collection("users");
+
+      var newEntry = {identifier: req.body.identifier, movies: []};
+
+      collection.find({identifier: req.body.identifier}).toArray(function (err, result) {
+        if (err) throw err;
+        if(result.length == 0) {
+            collection.insertOne(newEntry, (err, result) => {
+                if (err) {
+                  console.log("Error: " + err);
+                  return;
+                }
+            });
+        }
+        else {
+            collection.find({identifier: req.body.identifier}).toArray(function (err, result) {
+                if (err) throw err;
+                res.send(result);
+              });
+        }
+      });
+    }
+  );
+})
