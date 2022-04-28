@@ -8,6 +8,11 @@
   src: url(Jumbox-ZVLMZ.ttf);
 }
 
+@font-face {
+  font-family: Marvel;
+  src: url(MarvelRegular-Dj83.ttf);
+}
+
 a {
   text-decoration: none;
 }
